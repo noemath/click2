@@ -1,32 +1,28 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
-  </div>
+    <div>
+        <h1>Hello App!</h1>
+        <h2>I have {{ $store.state.money }}</h2>
+        <router-view></router-view>
+    </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+    import Component from "vue-class-component";
+    import gamePage from "./views/GameView.vue";
+    import shop from "./views/ShopView.vue";
 
-nav {
-  padding: 30px;
-}
+    import Vue from "vue";
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+    @Component({
+        components: {
+            gamePage,
+            shop,
+        },
+    })
+    export default class App extends Vue {
+        public name = "App";
+        public show = true;
+    }
+</script>
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style scoped></style>
