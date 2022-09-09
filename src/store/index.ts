@@ -1,36 +1,104 @@
+import { Bot } from "@/models/bot";
+import { ShopItem } from "@/models/shop-item";
 import Vue from "vue";
 import Vuex from "vuex";
+import {
+    FIRST_CLICK_MONEY,
+    FIRST_CLICK_PRICE,
+    FIRST_MONEY,
+} from "@/data/constants";
 
 Vue.use(Vuex);
 
+export enum EShopItemType {
+    AutoBot = 0,
+    UpgradeTime = 8,
+    UpgradePrice = 6,
+    UpgradeProduct = 4,
+}
+
+interface IShop {
+    autoBotAisle: ShopItem[];
+    upgradeAisle: ShopItem[];
+}
+
 interface IState {
-    endTimes: [number, number, number];
-    levels: [number, number, number];
+    bots: Bot[];
+    clickMoney: number;
+    clickPrice: number;
     money: number;
-    timeoutIDs: [number, number, number];
+    shop: IShop;
 }
 
 const store = new Vuex.Store<IState>({
     mutations: {
-        addLevel(state, payload: { key: number }): void {
-            state.levels[payload.key] += 1;
+        addBot(
+            state,
+            payload: {
+                key: number;
+                price: number;
+                product: number;
+                time: number;
+            }
+        ): void {
+            state.bots.push(
+                new Bot(
+                    payload.key,
+                    payload.price,
+                    payload.product,
+                    payload.time
+                )
+            );
         },
-        increment(state, payload: { amount: number }): void {
-            state.money += payload.amount;
+        addShopItemAutoBot(state, key: number): void {
+            state.shop.autoBotAisle.push(
+                new ShopItem(key, key, EShopItemType.AutoBot)
+            );
         },
-        setEndTimes(state, payload: { key: number; time: number }): void {
-            state.endTimes[payload.key] = payload.time;
+        addShopItemUpgrade(
+            state,
+            payload: {
+                botKey: number;
+                myKey: number;
+                shopItemType: EShopItemType;
+            }
+        ): void {
+            state.shop.upgradeAisle.push(
+                new ShopItem(
+                    payload.botKey,
+                    payload.myKey,
+                    payload.shopItemType
+                )
+            );
         },
-        setIds(state, payload: { id: number; key: number }): void {
-            state.timeoutIDs[payload.key] = payload.id;
+        changeMoney(state, amount: number): void {
+            state.money += amount;
+        },
+        removeAutoBot(state, key: number): void {
+            state.shop.autoBotAisle.splice(
+                state.shop.autoBotAisle.findIndex(
+                    (element): boolean => element.botKey === key
+                ),
+                1
+            );
+        },
+        setClickMoney(state, money: number): void {
+            state.clickMoney = money;
+        },
+        setClickPrice(state, price: number): void {
+            state.clickPrice = price;
         },
     },
     state: {
-        endTimes: [-1, -1, -1],
-        levels: [0, 0, 0],
-        money: 0,
-        timeoutIDs: [-1, -1, -1],
+        bots: [],
+        clickMoney: FIRST_CLICK_MONEY,
+        clickPrice: FIRST_CLICK_PRICE,
+        money: FIRST_MONEY,
+        shop: {
+            autoBotAisle: [],
+            upgradeAisle: [],
+        },
     },
 });
 
-export { store, IState };
+export { store, IState, IShop };

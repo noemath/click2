@@ -1,0 +1,22 @@
+[
+    {
+        "price": 10,
+        "time": 1000,
+        "product": 1
+    },
+    {
+        "price": 100,
+        "time": 3000,
+        "product": 20
+    },
+    {
+        "price": 1000,
+        "time": 10000,
+        "product": 444
+    },
+    {
+        "price": 10000,
+        "time": 20000,
+        "product": 6000
+    }
+]

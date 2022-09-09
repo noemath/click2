@@ -1,0 +1,19 @@
+const FIRST_CLICK_MONEY = 50000;
+const FIRST_CLICK_PRICE = 100;
+const FIRST_MONEY = 10;
+const HUNDRED = 100;
+const PRICE_RAISE = 1.01;
+const THOUSAND = 1000;
+const TEN = 10;
+const TWO = 2;
+
+export {
+    FIRST_CLICK_MONEY,
+    FIRST_CLICK_PRICE,
+    FIRST_MONEY,
+    HUNDRED,
+    PRICE_RAISE,
+    THOUSAND,
+    TEN,
+    TWO,
+};

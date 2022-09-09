@@ -1,5 +1,5 @@
-import GamePage from "../views/GameView.vue";
-import Shop from "../views/ShopView.vue";
+import VGame from "@/views/v-game.vue";
+import VShop from "@/views/v-shop.vue";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
@@ -7,12 +7,12 @@ Vue.use(VueRouter);
 
 const routes: RouteConfig[] = [
     {
-        component: GamePage,
-        name: "gamePage",
+        component: VGame,
+        name: "game",
         path: "/",
     },
     {
-        component: Shop,
+        component: VShop,
         name: "shop",
         path: "/shop",
     },
@@ -22,4 +22,4 @@ const router = new VueRouter({
     routes,
 });
 
-export default router;
+export { router };

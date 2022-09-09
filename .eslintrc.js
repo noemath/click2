@@ -180,7 +180,6 @@ module.exports = {
                         modifiers: ["const"],
                         selector: "variable",
                         types: ["boolean", "string", "number"],
-                        // TODO: types: ["string", "number"],
                     },
                     /*
                      * {
@@ -366,7 +365,6 @@ module.exports = {
         {
             files: ["*.vue"],
             rules: {
-                // TODO: Make the vue file the least custom as possible
                 "class-methods-use-this": "off",
                 "max-lines": ["error", 1000],
             },
